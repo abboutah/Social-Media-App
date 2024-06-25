@@ -1,7 +1,9 @@
+
 from django.db import models
 from django.contrib.auth import get_user_model
 import uuid
 from datetime import datetime
+from django.utils import timezone
 
 #Gets the currently active user model
 User = get_user_model()
@@ -11,7 +13,7 @@ class Profile(models.Model):
     # Many-to-one relationship linking each profile to a user in the User model
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     # Auto-incrementing primary key for the Profile model
-    profile_id = models.AutoField(primary_key=True, default=0)
+    profile_id = models.AutoField(primary_key=True)
     # Text field for user biography, optional with a default value
     bio = models.TextField(blank=True, default='')
    # Image field for profile images, with an upload directory and default image
@@ -25,8 +27,7 @@ class Profile(models.Model):
 
 
 class Post(models.Model):
-    # Define a 128-bit UUID as the primary key for the Post model
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.AutoField(primary_key=True)
     # Define a CharField representing the username of the user who created the post
     user = models.CharField(max_length=100)
     # Define an ImageField for uploading images for posts, with the upload directory specified

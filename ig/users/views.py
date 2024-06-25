@@ -37,7 +37,7 @@ def signup(request):
             return redirect('/loginn')  # Redirect to the login page if user creation failed
     
     # Handle any exceptions
-   except Exception as e:
+    except Exception as e:
         print(e)  # Print the exception for debugging purposes
         error_message = "User already exists or another error occurred"    
         return render(request, 'signup.html', {'error_message': error_message})  # Render the signup page with the error message
